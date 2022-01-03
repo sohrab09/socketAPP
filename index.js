@@ -11,8 +11,23 @@ const io = new Server(expressServer);
 
 // ! User Connection Checking
 io.on("connection", function (socket) {
-  socket.on("chat", function (chat) {
-    console.log(chat);
+    console.log("User Connection Checked");
+});
+
+
+
+// * Receive data from client
+io.on("connection", function (socket) {
+  socket.on("chat", function (msg) {
+    console.log(msg);
+  });
+});
+
+
+// * Send data from server
+io.on("connection", function (socket) {
+  socket.on("chat", function (msg) {
+    io.emit("chat_transfer", msg);
   });
 });
 
